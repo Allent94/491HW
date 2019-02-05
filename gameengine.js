@@ -63,6 +63,8 @@ GameEngine.prototype.startInput = function () {
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
         if (String.fromCharCode(e.which) === ' ') that.space = true;
+        if (String.fromCharCode(e.which) === 'D') that.D = true;
+        if (String.fromCharCode(e.which) === 'A') that.A = true;
 //        console.log(e);
         e.preventDefault();
     }, false);
@@ -107,6 +109,8 @@ GameEngine.prototype.loop = function () {
     this.update();
     this.draw();
     this.space = null;
+    this.A = null;
+    this.D = null;
 }
 
 function Entity(game, x, y) {

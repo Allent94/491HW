@@ -111,6 +111,43 @@ Naruto.prototype.constructor = Naruto;
 
 Naruto.prototype.update = function () {
     if (this.game.space) this.jumping = true;
+    if (this.game.A) this.x -= 10;
+    if (this.game.D) this.x += 10;
+    if(this.game.A && this.jumping) {
+
+        var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime;
+        var totalHeight = 100;
+
+        if (jumpDistance > 0.2)
+            jumpDistance = 1 - jumpDistance;
+
+        //var height = jumpDistance * 2 * totalHeight;
+        var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
+        this.y = this.ground - height;
+
+        this.x-= 30;
+
+
+    }
+
+    if(this.game.D && this.jumping) {
+
+        var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime + 100;
+        var totalHeight = 100;
+
+        if (jumpDistance > 0.2)
+            jumpDistance = 1 - jumpDistance;
+
+        //var height = jumpDistance * 2 * totalHeight;
+        var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
+        this.y = this.ground - height;
+
+        this.x+= 30;
+
+
+    }
+    
+
     if (this.jumping) {
         if (this.jumpAnimation.isDone()) {
             this.jumpAnimation.elapsedTime = 0;
